@@ -6,32 +6,21 @@
   <title>HOMER</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
-    /* ─────────────────────────────────────────
-       TOKENS
-    ───────────────────────────────────────── */
     :root {
       --bg:        #f2f2f7;
       --card:      #ffffff;
       --card2:     #f9f9fb;
       --border:    rgba(0,0,0,.07);
       --border2:   rgba(0,0,0,.11);
-
       --t1: #1c1c1e;
       --t2: #636366;
       --t3: #aeaeb2;
       --t4: #c7c7cc;
-
       --blue:   #0071e3;
       --teal:   #30b0c7;
       --violet: #6e4dc5;
       --green:  #34c759;
       --red:    #ff3b30;
-
-      /* ── easy to change per location ── */
-      --manipal-h:  220;   /* hue for Manipal  → blue  */
-      --ludhiana-h: 195;   /* hue for Ludhiana → teal  */
-      --mac-h:      265;   /* hue for MacBook  → violet*/
-
       --f: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --mono: 'SF Mono', 'Menlo', monospace;
       --r: 16px;
@@ -46,11 +35,10 @@
       background: var(--bg);
       color: var(--t1);
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ─────────────────────────────────────────
-       NAV
-    ───────────────────────────────────────── */
+    /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(242,242,247,.82);
@@ -60,7 +48,7 @@
     }
     .nav-in {
       max-width: 1100px; margin: 0 auto;
-      padding: 0 32px; height: 50px;
+      padding: 0 16px; height: 50px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-brand {
@@ -73,6 +61,7 @@
       width: 26px; height: 26px; border-radius: 7px;
       background: var(--t1);
       display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
     .nav-pills { display: flex; gap: 6px; }
     .npill {
@@ -92,21 +81,19 @@
       50%      { box-shadow: 0 0 0 5px rgba(52,199,89,.07); }
     }
 
-    /* ─────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────── */
+    /* ── HERO ── */
     .hero {
       max-width: 1100px; margin: 0 auto;
-      padding: 72px 32px 52px;
+      padding: 48px 16px 36px;
       display: flex; flex-direction: column;
       align-items: center; text-align: center;
-      gap: 28px;
+      gap: 24px;
     }
     .hero-left h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; letter-spacing: -.05em; line-height: 1.05;
+      font-size: clamp(1.5rem, 6vw, 3rem);
+      font-weight: 800; letter-spacing: -.05em; line-height: 1.1;
       color: var(--t1);
-      white-space: nowrap;
+      white-space: normal;
     }
     .hero-left h1 span {
       background: linear-gradient(135deg, var(--blue), var(--teal));
@@ -114,71 +101,69 @@
       background-clip: text;
     }
     .hero-left p {
-      margin-top: 10px; font-size: .92rem;
+      margin-top: 10px; font-size: .88rem;
       color: var(--t2); font-weight: 400; line-height: 1.6;
     }
     .stat-row {
-      display: flex; gap: 0;
+      display: flex; gap: 0; flex-wrap: wrap;
       background: var(--card); border: 1px solid var(--border);
       border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow);
+      width: 100%;
     }
     .stat {
-      padding: 16px 32px; text-align: center;
+      flex: 1; min-width: 80px;
+      padding: 14px 20px; text-align: center;
       border-right: 1px solid var(--border);
     }
     .stat:last-child { border-right: none; }
-    .stat-n { font-size: 1.5rem; font-weight: 800; letter-spacing: -.04em; color: var(--t1); }
-    .stat-l { font-size: .68rem; font-weight: 500; color: var(--t3); margin-top: 2px; text-transform: uppercase; letter-spacing: .06em; }
+    .stat-n { font-size: 1.4rem; font-weight: 800; letter-spacing: -.04em; color: var(--t1); }
+    .stat-l { font-size: .66rem; font-weight: 500; color: var(--t3); margin-top: 2px; text-transform: uppercase; letter-spacing: .06em; }
 
-    /* ─────────────────────────────────────────
-       PAGE
-    ───────────────────────────────────────── */
+    /* ── PAGE ── */
     .page {
       max-width: 1100px; margin: 0 auto;
-      padding: 0 32px 100px;
-      display: flex; flex-direction: column; gap: 40px;
+      padding: 0 16px 80px;
+      display: flex; flex-direction: column; gap: 32px;
     }
 
-    /* ─────────────────────────────────────────
-       LOCATION BLOCK  (one per Manipal/Ludhiana)
-    ───────────────────────────────────────── */
-    .loc-block {
-      display: flex; flex-direction: column; gap: 14px;
+    /* ── LOCATION BLOCK ── */
+    .loc-block, .mac-block {
+      display: flex; flex-direction: column; gap: 12px;
       opacity: 0;
       animation: rise .5s cubic-bezier(.22,1,.36,1) forwards;
     }
     .loc-block:nth-child(1){ animation-delay: .07s }
     .loc-block:nth-child(2){ animation-delay: .14s }
     .loc-block:nth-child(3){ animation-delay: .21s }
+    .loc-block:nth-child(4){ animation-delay: .28s }
+    .mac-block { animation-delay: .35s }
 
     @keyframes rise {
       from { opacity:0; transform: translateY(16px) }
       to   { opacity:1; transform: translateY(0) }
     }
 
-    /* Location header row */
     .loc-header {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     }
     .loc-pill {
-      font-size: .7rem; font-weight: 700;
+      font-size: .68rem; font-weight: 700;
       letter-spacing: .04em; text-transform: uppercase;
       padding: 5px 13px; border-radius: 99px; color: #fff;
+      white-space: nowrap;
     }
     .pill-m { background: var(--blue); }
     .pill-l { background: var(--teal); }
     .pill-k { background: var(--violet); }
 
     .loc-divider {
-      flex: 1; height: 1px; background: var(--border2);
+      flex: 1; min-width: 20px; height: 1px; background: var(--border2);
     }
     .loc-count {
-      font-size: .72rem; color: var(--t3); font-weight: 500;
+      font-size: .72rem; color: var(--t3); font-weight: 500; white-space: nowrap;
     }
 
-    /* ─────────────────────────────────────────
-       TABLE CARD
-    ───────────────────────────────────────── */
+    /* ── CARD / TABLE ── */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -188,61 +173,62 @@
     }
 
     .card-head {
-      padding: 13px 20px 12px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
     .card-title {
-      font-size: .75rem; font-weight: 600; color: var(--t2);
+      font-size: .73rem; font-weight: 600; color: var(--t2);
       text-transform: uppercase; letter-spacing: .07em;
     }
     .card-tag {
-      font-size: .68rem; font-weight: 500; color: var(--t3);
+      font-size: .66rem; font-weight: 500; color: var(--t3);
       background: var(--bg); border: 1px solid var(--border);
       padding: 2px 9px; border-radius: 99px;
     }
 
-    table { width: 100%; border-collapse: collapse; }
+    /* Desktop table — hidden on mobile */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 520px; }
     thead th {
-      padding: 11px 20px;
-      font-size: .82rem; font-weight: 700;
-      letter-spacing: .01em; text-transform: none;
+      padding: 10px 16px;
+      font-size: .8rem; font-weight: 700;
       color: var(--t1); background: var(--card2);
       border-bottom: 1px solid var(--border);
-      text-align: left;
+      text-align: left; white-space: nowrap;
     }
     tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: var(--card2); }
-    tbody td { padding: 13px 20px; font-size: .86rem; font-weight: 400; color: var(--t2); vertical-align: middle; }
+    tbody td { padding: 12px 16px; font-size: .84rem; font-weight: 400; color: var(--t2); vertical-align: middle; }
 
-    .dev { font-weight: 500; color: var(--t1); letter-spacing: -.01em; font-size: .84rem; }
+    .dev { font-weight: 500; color: var(--t1); letter-spacing: -.01em; font-size: .82rem; }
     .dev-sub { font-size: .67rem; color: var(--t4); margin-top: 2px; font-family: var(--mono); font-weight: 400; }
 
     .badge {
       display: inline-flex; align-items: center; gap: 5px;
       font-size: .72rem; font-weight: 600;
       padding: 3px 9px; border-radius: 6px;
-      letter-spacing: -.01em;
+      letter-spacing: -.01em; white-space: nowrap;
     }
-    .dot { width: 5px; height: 5px; border-radius: 50%; }
+    .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
 
-    /* MARS = blue, PLUTO = teal */
     .bm { background: #e8f0fd; color: #1557c0; }
     .bm .dot { background: #1557c0; }
     .bp { background: #e0f5ee; color: #0a6847; }
     .bp .dot { background: #0a6847; }
     .be { color: var(--t4); font-size: .78rem; font-weight: 400; }
 
-    /* Python path */
     .path-wrap { display: flex; align-items: center; gap: 7px; }
     .path-pill {
       font-family: var(--mono);
-      font-size: .67rem; font-weight: 400; color: var(--t2);
+      font-size: .65rem; font-weight: 400; color: var(--t2);
       background: var(--bg); border: 1px solid var(--border);
       padding: 3px 9px; border-radius: 6px;
-      max-width: 280px; overflow: hidden;
-      text-overflow: ellipsis; white-space: nowrap;
+      white-space: nowrap;
     }
     .copy-btn {
       width: 26px; height: 26px; flex-shrink: 0;
@@ -251,14 +237,49 @@
       cursor: pointer; display: flex;
       align-items: center; justify-content: center;
       transition: all .14s; outline: none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .copy-btn:hover { border-color: var(--border2); color: var(--t1); box-shadow: 0 1px 6px rgba(0,0,0,.09); }
+    .copy-btn:hover, .copy-btn:active { border-color: var(--border2); color: var(--t1); box-shadow: 0 1px 6px rgba(0,0,0,.09); }
     .copy-btn.ok { background: #f0fdf4; border-color: rgba(52,199,89,.3); color: var(--green); }
     .copy-btn svg { display: block; pointer-events: none; }
 
-    /* ─────────────────────────────────────────
-       SIM PANEL (right column)
-    ───────────────────────────────────────── */
+    /* ── MOBILE CARD LAYOUT (replaces table on small screens) ── */
+    .mobile-cards { display: none; }
+    .m-device-card {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .m-device-card:last-child { border-bottom: none; }
+    .m-device-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .m-device-name {
+      font-weight: 600; color: var(--t1); font-size: .85rem;
+    }
+    .m-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .m-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 8px; gap: 8px;
+    }
+    .m-label {
+      font-size: .7rem; font-weight: 600; color: var(--t3);
+      text-transform: uppercase; letter-spacing: .07em;
+      flex-shrink: 0;
+    }
+    .m-path-wrap {
+      display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; min-width: 0;
+    }
+    .m-path-pill {
+      font-family: var(--mono);
+      font-size: .63rem; color: var(--t2);
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 3px 8px; border-radius: 6px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      max-width: 160px; min-width: 0;
+    }
+
+    /* ── SIM PANEL ── */
     .sim-panel {
       background: var(--card);
       border: 1px solid var(--border);
@@ -266,20 +287,15 @@
       overflow: hidden;
       box-shadow: var(--shadow);
     }
-
-    .sim-list {
-      display: flex; flex-direction: column;
-    }
-
+    .sim-list { display: flex; flex-direction: column; }
     .sim-row {
       display: flex; align-items: center;
-      padding: 13px 20px; gap: 14px;
+      padding: 12px 16px; gap: 12px;
       border-bottom: 1px solid var(--border);
       transition: background .1s;
     }
     .sim-row:last-child { border-bottom: none; }
-    .sim-row:hover { background: var(--card2); }
-
+    .sim-row:hover, .sim-row:active { background: var(--card2); }
     .sim-idx {
       width: 28px; height: 28px; border-radius: 8px;
       background: var(--bg); border: 1px solid var(--border);
@@ -287,35 +303,26 @@
       font-size: .68rem; font-weight: 700; color: var(--t3);
       flex-shrink: 0; font-family: var(--mono);
     }
-
     .sim-info { flex: 1; min-width: 0; }
     .sim-num {
-      font-family: var(--mono); font-size: .82rem;
-      font-weight: 700; color: var(--t1); margin-top: 1px;
+      font-family: var(--mono); font-size: .84rem;
+      font-weight: 700; color: var(--t1);
     }
     .sim-num.none { color: var(--t4); font-family: var(--f); font-style: italic; font-size: .78rem; font-weight: 400; }
-
     .carrier {
       display: inline-flex; align-items: center; gap: 5px;
-      font-size: .72rem; font-weight: 700;
+      font-size: .7rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .06em;
       padding: 4px 11px; border-radius: 99px; flex-shrink: 0;
+      white-space: nowrap;
     }
-    .cdot { width: 5px; height: 5px; border-radius: 50%; }
+    .cdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
     .cat { background: #fff1f0; color: var(--red); }
     .cat .cdot { background: var(--red); }
     .cji { background: #eaf3fe; color: var(--blue); }
     .cji .cdot { background: var(--blue); }
 
-    /* ─────────────────────────────────────────
-       MACBOOK SECTION  (full width)
-    ───────────────────────────────────────── */
-    .mac-block {
-      display: flex; flex-direction: column; gap: 14px;
-      opacity: 0;
-      animation: rise .5s cubic-bezier(.22,1,.36,1) .21s forwards;
-    }
-
+    /* ── MACBOOK ── */
     .term {
       background: #1c1c1e;
       border: 1px solid rgba(255,255,255,.06);
@@ -329,47 +336,59 @@
       display: flex; align-items: center; gap: 7px;
       border-bottom: 1px solid rgba(255,255,255,.05);
     }
-    .tc { width: 12px; height: 12px; border-radius: 50%; }
+    .tc { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
     .tc-r { background: #ff5f57; } .tc-y { background: #ffbd2e; } .tc-g { background: #28c840; }
     .term-title {
       margin-left: 6px; font-family: var(--mono);
-      font-size: .71rem; color: #636366;
+      font-size: .69rem; color: #636366;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .term-body { padding: 22px 28px; display: flex; flex-direction: column; gap: 9px; }
+    .term-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 9px; }
     .term-line {
-      font-family: var(--mono); font-size: .83rem;
+      font-family: var(--mono); font-size: .8rem;
       color: #a8d8a8; display: flex; gap: 10px; line-height: 1.5;
+      word-break: break-all;
     }
-    /* To add/remove ports, add or remove a .term-line div */
-    .t-ps { color: #34c759; user-select: none; font-weight: 600; }
+    .t-ps { color: #34c759; user-select: none; font-weight: 600; flex-shrink: 0; }
 
-    /* ─────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────── */
+    /* ── RESPONSIVE BREAKPOINTS ── */
+    @media (max-width: 580px) {
+      .hero { padding: 36px 16px 28px; gap: 20px; }
+      .page { padding: 0 12px 70px; gap: 28px; }
+
+      /* Hide table, show mobile cards */
+      .table-wrap { display: none; }
+      .mobile-cards { display: block; }
+
+      .stat { padding: 12px 14px; }
+      .stat-n { font-size: 1.25rem; }
+      .stat-l { font-size: .62rem; }
+
+      .term-body { padding: 14px 16px; }
+      .term-line { font-size: .74rem; }
+
+      .sim-num { font-size: .8rem; }
+      .carrier { font-size: .67rem; padding: 3px 9px; }
+    }
+
+    @media (min-width: 581px) {
+      .mobile-cards { display: none !important; }
+      .table-wrap { display: block !important; }
+    }
+
+    /* ── FOOTER ── */
     footer {
       max-width: 1100px; margin: 0 auto;
-      padding: 22px 32px 48px;
+      padding: 20px 16px 40px;
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
       border-top: 1px solid var(--border);
     }
-    footer span { font-size: .75rem; color: var(--t3); }
-
-    /* ─────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────── */
-    @media (max-width: 600px) {
-      .hero { padding: 48px 20px 36px; }
-      .page { padding: 0 20px 80px; }
-      .hero-left h1 { font-size: 2rem; }
-      .stat-row { flex-wrap: wrap; }
-      tbody td, thead th { padding: 10px 14px; font-size: .78rem; }
-      .path-pill { max-width: 120px; }
-    }
+    footer span { font-size: .73rem; color: var(--t3); }
   </style>
 </head>
 <body>
 
-<!-- ═══════════  NAV ═══════════ -->
+<!-- NAV -->
 <nav>
   <div class="nav-in">
     <a href="#" class="nav-brand">
@@ -382,18 +401,16 @@
     </a>
     <div class="nav-pills">
       <div class="npill"><span class="live-dot"></span>Live</div>
-
     </div>
   </div>
 </nav>
 
-<!-- ═══════════  HERO ═══════════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-   <h1>COM - PORTS&nbsp;&nbsp;&amp;&nbsp;&nbsp;<span>PYTHON - PATHS</span></h1>
+    <h1>COM - PORTS &amp; <span>PYTHON - PATHS</span></h1>
     <p>Device configuration across Manipal and Ludhiana.</p>
   </div>
-  <!-- ── STAT STRIP: edit .stat-n to change numbers ── -->
   <div class="stat-row">
     <div class="stat"><div class="stat-n">2</div><div class="stat-l">Locations</div></div>
     <div class="stat"><div class="stat-n">10</div><div class="stat-l">Laptops</div></div>
@@ -401,11 +418,10 @@
   </div>
 </section>
 
-<!-- ═══════════  PAGE ═══════════ -->
+<!-- PAGE -->
 <div class="page">
 
-  <!-- ── MANIPAL COM PORTS ──
-       EDIT: change .badge text · update data-path + .path-pill text per laptop -->
+  <!-- MANIPAL COM PORTS -->
   <div class="loc-block">
     <div class="loc-header">
       <span class="loc-pill pill-m">Manipal</span>
@@ -417,42 +433,70 @@
         <span class="card-title">COM Ports</span>
         <span class="card-tag">MARS &amp; PLUTO</span>
       </div>
-      <table>
-        <thead><tr><th>Device</th><th>MARS</th><th>PLUTO</th><th>Python Path</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="dev">Laptop 1</div></td>
-            <td><span class="badge bm"><span class="dot"></span>COM 4</span></td>
-            <td><span class="badge bp"><span class="dot"></span>COM 6</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 2</div></td>
-            <td><span class="badge bm"><span class="dot"></span>COM 5</span></td>
-            <td><span class="badge bp"><span class="dot"></span>COM 4</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 3</div></td>
-            <td><span class="be">—</span></td><td><span class="be">—</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 4</div></td>
-            <td><span class="be">—</span></td><td><span class="be">—</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 5</div></td>
-            <td><span class="be">—</span></td><td><span class="be">—</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- Desktop Table -->
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Device</th><th>MARS</th><th>PLUTO</th><th>Python Path</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="dev">Laptop 1</div></td>
+              <td><span class="badge bm"><span class="dot"></span>COM 4</span></td>
+              <td><span class="badge bp"><span class="dot"></span>COM 6</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 2</div></td>
+              <td><span class="badge bm"><span class="dot"></span>COM 5</span></td>
+              <td><span class="badge bp"><span class="dot"></span>COM 4</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 3</div></td>
+              <td><span class="be">—</span></td><td><span class="be">—</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 4</div></td>
+              <td><span class="be">—</span></td><td><span class="be">—</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 5</div></td>
+              <td><span class="be">—</span></td><td><span class="be">—</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards -->
+      <div class="mobile-cards">
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 1</span><div class="m-badges"><span class="badge bm"><span class="dot"></span>COM 4</span><span class="badge bp"><span class="dot"></span>COM 6</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 2</span><div class="m-badges"><span class="badge bm"><span class="dot"></span>COM 5</span><span class="badge bp"><span class="dot"></span>COM 4</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 3</span><div class="m-badges"><span class="be">MARS —</span><span class="be">PLUTO —</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 4</span><div class="m-badges"><span class="be">MARS —</span><span class="be">PLUTO —</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 5</span><div class="m-badges"><span class="be">MARS —</span><span class="be">PLUTO —</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ── LUDHIANA COM PORTS ── -->
+  <!-- LUDHIANA COM PORTS -->
   <div class="loc-block">
     <div class="loc-header">
       <span class="loc-pill pill-l">Ludhiana</span>
@@ -464,44 +508,70 @@
         <span class="card-title">COM Ports</span>
         <span class="card-tag">MARS &amp; PLUTO</span>
       </div>
-      <table>
-        <thead><tr><th>Device</th><th>MARS</th><th>PLUTO</th><th>Python Path</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="dev">Laptop 1</div></td>
-            <td><span class="badge bm"><span class="dot"></span>COM 4</span></td>
-            <td><span class="badge bp"><span class="dot"></span>COM 6</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 2</div></td>
-            <td><span class="badge bm"><span class="dot"></span>COM 5</span></td>
-            <td><span class="badge bp"><span class="dot"></span>COM 4</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 3</div></td>
-            <td><span class="be">—</span></td><td><span class="be">—</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 4</div></td>
-            <td><span class="be">—</span></td><td><span class="be">—</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><div class="dev">Laptop 5</div></td>
-            <td><span class="be">—</span></td><td><span class="be">—</span></td>
-            <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- Desktop Table -->
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Device</th><th>MARS</th><th>PLUTO</th><th>Python Path</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="dev">Laptop 1</div></td>
+              <td><span class="badge bm"><span class="dot"></span>COM 4</span></td>
+              <td><span class="badge bp"><span class="dot"></span>COM 6</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 2</div></td>
+              <td><span class="badge bm"><span class="dot"></span>COM 5</span></td>
+              <td><span class="badge bp"><span class="dot"></span>COM 4</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 3</div></td>
+              <td><span class="be">—</span></td><td><span class="be">—</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 4</div></td>
+              <td><span class="be">—</span></td><td><span class="be">—</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+            <tr>
+              <td><div class="dev">Laptop 5</div></td>
+              <td><span class="be">—</span></td><td><span class="be">—</span></td>
+              <td><div class="path-wrap"><span class="path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards -->
+      <div class="mobile-cards">
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 1</span><div class="m-badges"><span class="badge bm"><span class="dot"></span>COM 4</span><span class="badge bp"><span class="dot"></span>COM 6</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 2</span><div class="m-badges"><span class="badge bm"><span class="dot"></span>COM 5</span><span class="badge bp"><span class="dot"></span>COM 4</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 3</span><div class="m-badges"><span class="be">MARS —</span><span class="be">PLUTO —</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 4</span><div class="m-badges"><span class="be">MARS —</span><span class="be">PLUTO —</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+        <div class="m-device-card">
+          <div class="m-device-header"><span class="m-device-name">Laptop 5</span><div class="m-badges"><span class="be">MARS —</span><span class="be">PLUTO —</span></div></div>
+          <div class="m-row"><span class="m-label">Python</span><div class="m-path-wrap"><span class="m-path-pill">C:/Program Files/Python313/Pythonw.exe</span><button class="copy-btn" data-path="C:/Program Files/Python313/Pythonw.exe"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg></button></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ── MANIPAL SIM CARDS ──
-       EDIT: .sim-num text = phone number · add class "none" for no number
-             .carrier class: cat = Airtel, cji = Jio -->
+  <!-- MANIPAL SIM CARDS -->
   <div class="loc-block">
     <div class="loc-header">
       <span class="loc-pill pill-m">Manipal</span>
@@ -523,7 +593,7 @@
     </div>
   </div>
 
-  <!-- ── LUDHIANA SIM CARDS ── -->
+  <!-- LUDHIANA SIM CARDS -->
   <div class="loc-block">
     <div class="loc-header">
       <span class="loc-pill pill-l">Ludhiana</span>
@@ -545,13 +615,12 @@
     </div>
   </div>
 
-  <!-- ── MACBOOK COM PORTS ──
-       EDIT: add/remove .term-line divs inside .term-body -->
+  <!-- MACBOOK COM PORTS -->
   <div class="mac-block">
     <div class="loc-header">
       <span class="loc-pill pill-k">Yuvanesh's MacBook</span>
       <div class="loc-divider"></div>
-      <span class="loc-count">4 ports</span>
+      <span class="loc-count">5 ports</span>
     </div>
     <div class="term">
       <div class="term-bar">
@@ -570,7 +639,7 @@
     </div>
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
   const CI = `<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>`;
